@@ -1,0 +1,8 @@
+{
+  "firstName": "Тест",
+  "middleName": "Тестович",
+  "lastName": "Тестов",
+  "homeAddress": {
+    "addressStr": "string"
+  }
+}
