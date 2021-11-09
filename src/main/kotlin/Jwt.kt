@@ -14,19 +14,12 @@ val stringToEncode = """
 "auth:token:encrypt":"Stub Encrypt Token"}
 """.replace("^\\s+|\\n".toRegex(RegexOption.MULTILINE), "")
 
+data class A (var x: String, var y: String )
 val  etalon = """{"sub":"1234567890","name":"John Doe","iat":1516239022}"""
 fun main() {
 
-    println(encode(stringToEncode))
-//    val payload = decode(stringToDecode)
-//    println(payload)
 
-//    println(stringToEncode)
-//    println("${etalon == stringToEncode}\n\n")
-//    val encodedString = encode(stringToEncode)
-//    val encodedEtalon = encode(etalon)
-//    println(encodedEtalon == stringToDecode)
-//    println(encodedString == stringToDecode)
+    println(encode(stringToEncode))
 }
 
 //    {"sub":"1234567890","name":"John Doe","iat":1516239022}

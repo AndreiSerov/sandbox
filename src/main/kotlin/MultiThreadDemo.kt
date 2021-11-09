@@ -1,5 +1,4 @@
-class MyThread(threadName: String) : Runnable {
-    private val name: String = threadName
+class MyThread(private val name: String) : Runnable {
     private val t: Thread = Thread(this, name)
 
     init {

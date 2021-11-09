@@ -19,31 +19,31 @@ import static java.util.stream.Collectors.toList;
 
 public class DateTimeChecker {
     public static void main(String[] args) throws ParseException {
-        DateTimeFormatter dtf = new DateTimeFormatterBuilder()
-                .appendInstant(3)
-                .toFormatter()
-                .withLocale(Locale.ROOT)
-                .withResolverStyle(ResolverStyle.STRICT);
-
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS Z").withZone(ZoneOffset.UTC);
-
-        System.out.println(format.format(Instant.now().plus(3, ChronoUnit.HOURS)));
-
-        System.out.println("Instant.now().toEpochMilli(): " + Instant.now().toEpochMilli());
-        System.out.println("Instant.now(): " + Instant.now());
-        System.out.println("new Timestamp(Instant.now().toEpochMilli()): " + new Timestamp(Instant.now().toEpochMilli()));
-
-        Instant bigger = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .parse("2021-09-19T08:42:50.644Z").toInstant();
-        Instant now = Instant.now();
-        Instant less = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .parse("2021-09-19T07:42:50.644Z").toInstant(); // 2021-09-19T08:42:50.644807Z
-
-//        System.out.println(bigger.compareTo(less));
-        System.out.println(TimeUnit.MILLISECONDS.toHours(bigger.toEpochMilli() - less.toEpochMilli()));
-        System.out.println(TimeUnit.MILLISECONDS.toHours(now.toEpochMilli() - less.toEpochMilli()));
-        System.out.println(less);
-        System.out.println(Long.valueOf("720"));
+//        DateTimeFormatter dtf = new DateTimeFormatterBuilder()
+//                .appendInstant(3)
+//                .toFormatter()
+//                .withLocale(Locale.ROOT)
+//                .withResolverStyle(ResolverStyle.STRICT);
+//
+//        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS Z").withZone(ZoneOffset.UTC);
+//
+//        System.out.println(format.format(Instant.now().plus(3, ChronoUnit.HOURS)));
+//
+//        System.out.println("Instant.now().toEpochMilli(): " + Instant.now().toEpochMilli());
+//        System.out.println("Instant.now(): " + Instant.now());
+//        System.out.println("new Timestamp(Instant.now().toEpochMilli()): " + new Timestamp(Instant.now().toEpochMilli()));
+//
+//        Instant bigger = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+//                .parse("2021-09-19T08:42:50.644Z").toInstant();
+//        Instant now = Instant.now();
+//        Instant less = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+//                .parse("2021-09-19T07:42:50.644Z").toInstant(); // 2021-09-19T08:42:50.644807Z
+//
+////        System.out.println(bigger.compareTo(less));
+//        System.out.println(TimeUnit.MILLISECONDS.toHours(bigger.toEpochMilli() - less.toEpochMilli()));
+//        System.out.println(TimeUnit.MILLISECONDS.toHours(now.toEpochMilli() - less.toEpochMilli()));
+//        System.out.println(less);
+//        System.out.println(Long.valueOf("720"));
 //        long diff = Period.between(less, bigger);
 
 
@@ -53,5 +53,14 @@ public class DateTimeChecker {
 //        System.out.println(timeStamp.charAt(23));
 //
 //        System.out.println(dtf.format(dtf.parse(timeStamp)));
+
+        System.out.println(getIso8601FromTimeWithTimeZone(Instant.now()));
+    }
+
+    private static final DateTimeFormatter DATE_TIME_WITH_MILLIS_AND_ZONE_WITH_Z = DateTimeFormatter
+            .ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneId.systemDefault());
+
+    public static String getIso8601FromTimeWithTimeZone(Instant temporal) {
+        return DATE_TIME_WITH_MILLIS_AND_ZONE_WITH_Z.format(temporal);
     }
 }
