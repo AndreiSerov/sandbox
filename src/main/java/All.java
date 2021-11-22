@@ -1,5 +1,6 @@
 import org.springframework.beans.factory.annotation.Value;
 
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
 
@@ -52,19 +53,19 @@ class A1 {
 
 
 public class All {
-    @Value("${test}")
-    private long someLong = 1_200_000;
-
-
     public static void main(String[] args) {
 
-        A1 a1 = new A1();
-        a1.setNum(10)
-        ;
-        List<A1> list = List.of(a1);
-        System.out.println(list.stream()
-                .max(Comparator.comparing(A1::getNum))
-                .orElse(null));
+        Instant now = Instant.now();
+
+
+
+//        A1 a1 = new A1();
+//        a1.setNum(10)
+//        ;
+//        List<A1> list = List.of(a1);
+//        System.out.println(list.stream()
+//                .max(Comparator.comparing(A1::getNum))
+//                .orElse(null));
 
 
 //        All all = new All();
