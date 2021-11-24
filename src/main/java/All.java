@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 class A1 {
     private String a;
@@ -53,10 +54,17 @@ class A1 {
 
 
 public class All {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Instant now = Instant.now();
+        Instant nullVal = null;
 
+        final Instant instant = Optional.of(nullVal)
+                .orElse(Instant.MAX)
+//                .orElseThrow(Exception::new)
+                ;
+
+        System.out.println(instant);
 
 
 //        A1 a1 = new A1();
