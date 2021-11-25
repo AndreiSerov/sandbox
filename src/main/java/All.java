@@ -1,9 +1,8 @@
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.Instant;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class A1 {
     private String a;
@@ -55,11 +54,22 @@ class A1 {
 
 public class All {
     public static void main(String[] args) throws Exception {
+        Map<String, List<Integer>> map = new HashMap<>();
+        map.put("Kalia", Collections.emptyList());
+        map.put("Other", Collections.emptyList());
+
+
+        var kalia = map.entrySet()
+                .stream()
+                .filter(it -> it.getKey().matches("(?i)^kalia"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        System.out.println(kalia);
+
 
         Instant now = Instant.now();
         Instant nullVal = null;
 
-        final Instant instant = Optional.of(nullVal)
+        final Instant instant = Optional.ofNullable(nullVal)
                 .orElse(Instant.MAX)
 //                .orElseThrow(Exception::new)
                 ;

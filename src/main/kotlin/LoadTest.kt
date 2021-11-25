@@ -90,5 +90,3 @@ data class Address (
     val street: String,
     val city: String
 )
-class LoadTest {
-}
