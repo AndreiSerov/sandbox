@@ -2,7 +2,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +16,15 @@ import java.util.stream.Collectors;
 
 class A1 {
     private String a;
-    private String b;
     private int num;
 
     public int getNum() {
         return num;
+    }
+
+    public A1(String a, int num) {
+        this.a = a;
+        this.num = num;
     }
 
     public void setNum(int num) {
@@ -23,11 +32,6 @@ class A1 {
     }
 
     public A1() {
-    }
-
-    public A1(String a, String b) {
-        this.a = a;
-        this.b = b;
     }
 
     public String getA() {
@@ -42,86 +46,41 @@ class A1 {
     public String toString() {
         return "A1{" +
                 "a='" + a + '\'' +
-                ", b='" + b + '\'' +
                 ", num=" + num +
                 '}';
-    }
-
-    public String getB() {
-        return b;
-    }
-
-    public void setB(String b) {
-        this.b = b;
     }
 }
 
 
 public class All {
+
     public static void main(String[] args) throws Exception {
-        Map<String, List<String>> map = new HashMap<>();
-        map.put("Kalia", List.of("1", "2", "3", "4", "5"));
-        map.put("Balia", List.of("1", "2", "3", "4", "5"));
-        map.put("content-type", List.of("WRONG"));
+        Instant pastDate = LocalDateTime
+                .parse("10-12-2018 00:00", DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
+                .toInstant(ZoneOffset.UTC);
 
-        map.put("Other", Collections.emptyList());
-
-
-        final HttpHeaders headers = new HttpHeaders();
-
-        var kalia = map.entrySet()
-                .stream()
-                .filter(it -> it.getKey().matches("(?i).*alia|"))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        headers.putAll(kalia);
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        System.out.println(kalia);
-        System.out.println(headers);
-
-
-        Instant now = Instant.now();
-        Instant nullVal = null;
-
-        final Obj objNull = null;
-        final Obj obj = new Obj();
-        obj.setA("A");
-
-        System.out.println(Optional.ofNullable(obj)
-                .filter(it -> !it.getA().equals("A"))
-                .orElse(new Obj())
-        );
-
-
-//        final Instant instant = Optional.ofNullable(nullVal)
-//                .filter(it -> it != null)
-////                .orElse(Instant.MAX)
-//                .orElseThrow(Exception::new)
-//                ;
-
-//        System.out.println(instant);
-
-
-//        A1 a1 = new A1();
-//        a1.setNum(10)
-//        ;
-//        List<A1> list = List.of(a1);
-//        System.out.println(list.stream()
-//                .max(Comparator.comparing(A1::getNum))
-//                .orElse(null));
-
-
-//        All all = new All();
-//        System.out.println(all.someLong);
-//        A1 a = new A1();
+        System.out.println(pastDate);
+//        final List<A1> list = List.of(
+//                new A1("1", 1),
+//                new A1("2", 2),
+//                new A1("3", 3)
+//        );
 //
-//        if (a.getA() != null && a.getA().equalsIgnoreCase("a1")) {
-//            System.out.println(a.getA());
-//        }
+//        final A1 a1 = list.stream()
+//                .max(Comparator.comparing(A1::getNum))
+//                .orElse(null);
+//
+//        final List<A1> list2 = List.of(new A1("3", 3));
+//
+//        final A1 a2 = list2.stream()
+//                .max(Comparator.comparing(A1::getNum))
+//                .orElse(null);
+//        System.out.println(a1);
 
-//        String nullStr = null;
-//        nullStr.equals("tratata");
+        final long val = Long.parseLong("2592000000");
+        System.out.println(val);
+
+
     }
 }
 

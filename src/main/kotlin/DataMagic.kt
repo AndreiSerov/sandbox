@@ -1,4 +1,6 @@
-
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 
 data class DataMagic (
@@ -11,8 +13,12 @@ data class Data (
     val dataMagic: List<DataMagic?>
 )
 
+fun Instant.toGtcTime() =  LocalDateTime.ofInstant(this, ZoneOffset.UTC)
+
 
 fun main() {
-    val data = Data("dataName", listOf<DataMagic>())
-    DataMagic("a", data)
+    val toGtcTime = Instant.now().toGtcTime()
+    println(toGtcTime)
+//    val data = Data("dataName", listOf<DataMagic>())
+//    DataMagic("a", data)
 }
