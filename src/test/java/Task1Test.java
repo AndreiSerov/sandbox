@@ -32,7 +32,7 @@ class Task1Test {
                 List.of("лапша")
         );
 
-        Collection<List<String>> actual = Task1.groupByAnagram(words);
+        Collection<List<String>> actual = Task1.groupByAnagramMapStream(words);
 
         assertTrue(expected.containsAll(actual));
     }
@@ -50,8 +50,15 @@ class Task1 {
         System.out.println(groupByAnagram(words));
 
     }*/
+//    public static Collection<List<String>> groupByAnagram(List<String> input) {
+//        new HashMap
+//
+//        return result;
+//
+//    }
 
-    public static Collection<List<String>> groupByAnagram(List<String> input) {
+    public static Collection<List<String>> groupByAnagramMapStream(List<String> input) {
+        final List<String> strings = Arrays.asList("s1", "s2", "s3");
         return input
                 .stream()
                 .collect(Collectors.toMap(
@@ -61,6 +68,7 @@ class Task1 {
                             return new String(chars);
                         },
                         it -> {
+                            final List<String> strings1 = new ArrayList<>();
                             final List<String> value = new ArrayList<>();
                             value.add(it);
                             return value;
@@ -73,6 +81,6 @@ class Task1 {
                 .values();
 
     }
-
-
 }
+
+

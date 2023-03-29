@@ -1,15 +1,13 @@
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.IntStream;
 
-public class Array {
+public class MyArray {
 
     public static void main(String[] args) {
 //        String[]  items = {"Table", "Chair", "Bed"};
-//        String[] reversed = Array.reverse(items);
+//        String[] reversed = MyArray.reverse(items);
         final Map<String, Object> map = new HashMap<>();
         map.put("C", "123");
         map.put("B", "123");
