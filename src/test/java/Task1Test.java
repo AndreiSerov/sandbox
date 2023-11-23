@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author andreiserov
+ * todo today
  */
 class Task1Test {
 
@@ -34,6 +35,7 @@ class Task1Test {
 
         Collection<List<String>> actual = Task1.groupByAnagramMapStream(words);
 
+        System.out.println(actual);
         assertTrue(expected.containsAll(actual));
     }
 }
@@ -43,7 +45,7 @@ class Task1 {
 
     /*
 
-        public static void main(String[] args) {
+        public static void yandexTest.main(String[] args) {
         //входные слова -> "нос", "зов", "сон", "атлас", "салат", "воз", "марка", "рамка", "лапша", "масло", "смола", "макар"
         //вывести результат -> [[нос, сон], [марка, рамка, макар], [атлас, салат], [зов, воз], [масло, смола], [лапша]]
         final var words = groupByAnagram;//
@@ -58,7 +60,6 @@ class Task1 {
 //    }
 
     public static Collection<List<String>> groupByAnagramMapStream(List<String> input) {
-        final List<String> strings = Arrays.asList("s1", "s2", "s3");
         return input
                 .stream()
                 .collect(Collectors.toMap(
@@ -68,7 +69,6 @@ class Task1 {
                             return new String(chars);
                         },
                         it -> {
-                            final List<String> strings1 = new ArrayList<>();
                             final List<String> value = new ArrayList<>();
                             value.add(it);
                             return value;

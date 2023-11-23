@@ -1,18 +1,7 @@
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 class A1 {
     private String a;
@@ -53,6 +42,8 @@ class A1 {
 
 
 public class All {
+
+
 
     public static void main(String[] args) throws Exception {
         Instant pastDate = LocalDateTime
@@ -113,5 +104,104 @@ class Obj {
 
     public void setB(String b) {
         this.b = b;
+    }
+}
+
+interface Recursive<T extends Recursive<T>> {
+
+    @SuppressWarnings("unchecked")
+    default T method() {
+        System.out.println("Recursive " + this.getClass());
+        return (T) this;
+    }
+}
+
+abstract class AbstractRecursive<T extends AbstractRecursive<T>> implements Recursive<T> {
+    @SuppressWarnings("unchecked")
+    public T methodFromAbstractClass() {
+        System.out.println("AbstractRecursive " + this.getClass());
+        return (T) this;
+    }
+}
+
+class RecursiveImpl extends AbstractRecursive<RecursiveImpl> {
+
+    public RecursiveImpl anotherMethod() {
+        System.out.println("Impl " + this.getClass());
+        return this;
+    }
+}
+
+class RecursiveDemo {
+    public static void main(String[] args) {
+
+        final RecursiveImpl recursive = new RecursiveImpl();
+
+        recursive.method().methodFromAbstractClass().anotherMethod().method();
+        recursive.method().methodFromAbstractClass().anotherMethod();
+    }
+}
+
+/*
+  Нужно написать свой рекуррентный дженерик наподобие того,
+  что в классе Стримов
+*/
+
+class Main {
+    public static void main(String[] args) {
+
+        final GenericImpl generic = new GenericImpl();
+
+        generic
+                .method()
+                .abstractGenericMethod()
+                .method();
+
+        new Page()
+                .pushLike()
+                .pushMenu()
+                .pushHome();
+        // generic.method().methodFromAbstractClass().anotherMethod().anotherMethod().method();
+    }
+
+
+}
+
+interface Generic<T extends Generic<T>> {
+    default T method() {
+        System.out.println("Generic called method: " + this.getClass());
+        return (T) this;
+    }
+}
+
+abstract class AbstractGeneric<T extends AbstractGeneric<T>> implements Generic<T> {
+    public T abstractGenericMethod() {
+        System.out.println("AbstractGeneric called genericImplMethod: " + this.getClass());
+        return (T) this;
+    }
+}
+
+class GenericImpl extends AbstractGeneric<GenericImpl> {
+
+}
+
+interface NavBar<T extends NavBar<T>> {
+    default T pushMenu() {
+        return (T) this;
+    }
+}
+
+interface MenuBar<T extends MenuBar<T>> {
+    default T pushHome() {
+        return (T) this;
+    }
+}
+
+abstract class AbstractPage<T extends AbstractPage<T>> implements MenuBar<T>, NavBar<T> {}
+
+class Page extends AbstractPage<Page> {
+
+    public Page pushLike() {
+        return this;
     }
 }
